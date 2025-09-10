@@ -96,15 +96,13 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({
     roles,
     approved,
-    admin: adminSettings, // { workdayStart, workdayEnd, holidays }
+    admin: adminSettings, 
     weekly,
     busy,
   });
 }
 
-// ---------- PUT ----------
-// Body:
-// { weekly: { mon:[{start,end}], ... }, busy: [{date,start,end,note?}] }
+
 export async function PUT(req: NextRequest) {
   const auth = await requireUser(req);
   if ("error" in auth) return NextResponse.json({ error: auth.error }, { status: auth.code });
@@ -163,7 +161,7 @@ export async function PUT(req: NextRequest) {
       weekly,
       busy,
       updatedAt: FieldValue.serverTimestamp(),
-      adminWorkday: { start: ws, end: we }, // convenience shadow
+      adminWorkday: { start: ws, end: we },
     },
     { merge: true }
   );

@@ -1,11 +1,6 @@
 import nodemailer from "nodemailer";
 
-/**
- * SMTP-first mailer.
- * - If SMTP_USER/PASS are set, uses Gmail SMTP (or any SMTP).
- * - Otherwise (optional), falls back to Resend if RESEND_API_KEY exists.
- * - Else throws a clear error.
- */
+
 
 async function sendViaSMTP({
   to, subject, html, text,
@@ -69,7 +64,7 @@ export async function sendEmail(args: { to: string; subject: string; html?: stri
   if (hasSMTP) return sendViaSMTP(args);
 
   if (process.env.RESEND_API_KEY) {
-    // Optional fallback if you left Resend configured
+  
     return sendViaResend(args);
   }
 

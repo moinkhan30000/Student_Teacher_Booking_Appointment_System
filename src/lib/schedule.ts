@@ -1,4 +1,4 @@
-// src/lib/schedule.ts
+
 export type HHMM = `${number}${number}:${number}${number}`; // "09:00"
 export type DayKey = "sun"|"mon"|"tue"|"wed"|"thu"|"fri"|"sat";
 

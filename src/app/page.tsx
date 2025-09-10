@@ -21,7 +21,7 @@ import { useUser } from "@/lib/auth";
 import PasswordChecklist from "@/components/PasswordChecklist";
 import { isCompliant } from "@/lib/passwordPolicy";
 
-// ----- login limiter (3 attempts -> 24h cooldown)
+
 const MAX_ATTEMPTS = 3;
 const FAIL_KEY = (email: string) => `signin.failures:${email.toLowerCase().trim()}`;
 const UNTIL_KEY = (email: string) => `signin.cooldownUntil:${email.toLowerCase().trim()}`;
@@ -58,21 +58,21 @@ export default function AuthPage() {
   const router = useRouter();
   const { uid, loading } = useUser();
 
-  // cooldown + attempts state
+
   const [cooldown, setCooldown] = useState(0);
   const [attempts, setAttempts] = useState(0);
 
-  // If already signed in, leave this page
+  
   useEffect(() => {
     if (!loading && uid) {
       router.replace("/dashboard");
     }
   }, [loading, uid, router]);
 
-  // Reset password field when mode flips
+ 
   useEffect(() => setPw(""), [mode]);
 
-  // Track cooldown + attempts for the current email
+
   useEffect(() => {
     if (!email) {
       setCooldown(0);
@@ -114,10 +114,10 @@ export default function AuthPage() {
         await setDoc(doc(db, "users", cred.user.uid), {
           displayName: name,
           email,
-          roles: [],            // student until admin assigns
+          roles: [],            
           approved: false,
           department,
-          pwCompliant: true,    // new accounts comply
+          pwCompliant: true,    
         });
 
         await sendEmailVerification(cred.user);
@@ -212,7 +212,7 @@ export default function AuthPage() {
             autoComplete={mode === "login" ? "current-password" : "new-password"}
           />
 
-          {/* Show policy only on registration */}
+          {/* Show policy on registration */}
           {mode === "register" && <PasswordChecklist value={pw} />}
 
           {mode === "login" && (cooldown > 0 || attempts > 0) && (

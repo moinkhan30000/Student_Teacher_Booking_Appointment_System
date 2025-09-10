@@ -16,7 +16,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 const IDLE_TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes
 const LS_LAST_ACTIVITY = "lastActivity";
-const SS_IDLE_LOGOUT = "idleLogout"; // sessionStorage flag for in-page timeout
+const SS_IDLE_LOGOUT = "idleLogout"; 
 
 type AuthState = {
   uid: string | null;
@@ -38,7 +38,7 @@ const AuthCtx = createContext<AuthState>({
   loading: true,
 });
 
-// merge roles from claims + user doc (keeps whichever has the role)
+
 function mergeRoles(a?: unknown, b?: unknown): string[] {
   const A = Array.isArray(a) ? (a as string[]) : [];
   const B = Array.isArray(b) ? (b as string[]) : [];
@@ -94,16 +94,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // On load/reload, if last activity was > 5m ago, silently sign out (no toast).
+
   useEffect(() => {
     const last = parseInt(localStorage.getItem(LS_LAST_ACTIVITY) || "0", 10);
     if (last && Date.now() - last > IDLE_TIMEOUT_MS) {
-      // Do NOT set SS_IDLE_LOGOUT here—this is the "user came back after idle" case.
+      
       fbSignOut(getAuth()).catch(() => {});
     }
   }, []);
 
-  // Core auth state (force-refresh claims once on sign-in and merge roles)
+  // Core auth state 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (user) => {
       const wasIdleLogout = sessionStorage.getItem(SS_IDLE_LOGOUT) === "1";
@@ -128,7 +128,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       try {
-        // Read user profile (approved + any doc roles + pwCompliant)
+        // Read user profile 
         let approved = false;
         let docRoles: string[] = [];
         let pwCompliant = true;
@@ -176,10 +176,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
 
     return () => unsub();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, []);
 
-  // Keep roles (custom claims) fresh as Firebase rotates tokens in the background
+  
   useEffect(() => {
     const unsub = onIdTokenChanged(auth, async (user: User | null) => {
       if (!user) {
@@ -187,11 +187,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return;
       }
       try {
-        // true => force refresh (cheap; avoids stale roles)
+        
         const tokenResult = await getIdTokenResult(user, true);
         const claimRoles = (tokenResult.claims.roles as string[]) || [];
 
-        // also peek at doc roles to keep union stable if claims lag
+        
         let docRoles: string[] = [];
         let pwCompliant = true;
         try {
@@ -215,7 +215,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => unsub();
   }, []);
 
-  // Redirect legacy/weak password users to /force-password
+ 
   useEffect(() => {
     if (state.loading) return;
     if (!state.uid) return;

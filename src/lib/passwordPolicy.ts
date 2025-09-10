@@ -1,4 +1,4 @@
-// src/lib/passwordPolicy.ts
+
 export type PwCheck = {
   length: boolean;
   upper: boolean;

@@ -5,8 +5,6 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-// If you want to be extra-safe about build/prerendering:
-// export const dynamic = "force-dynamic";
 
 function ClearAndRoute() {
   const search = useSearchParams();
@@ -30,7 +28,7 @@ function ClearAndRoute() {
       // no-op if storage blocked
     }
 
-    // Optional: support ?next=/somewhere
+
     const next = search.get("next") || "/";
     const t = setTimeout(() => router.replace(next), 50);
     return () => clearTimeout(t);

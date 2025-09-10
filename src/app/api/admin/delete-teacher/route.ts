@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     const db = getFirestore();
     const auth = getAdminAuth();
 
-    // teacher email (if any) for final note
+
     const teacherEmail = await userEmail(db, teacherUid);
 
     // 1) Cancel teacher's future appointments

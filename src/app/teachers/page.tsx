@@ -23,7 +23,7 @@ export default function TeachersPage() {
 
 function StudentsOnly() {
   const { roles } = useUser();
-  // Hide page for teacher/admin (they don't need to browse teachers)
+
   if (isTeacher(roles) || isAdmin(roles)) return null;
 
   const [q, setQ] = useState("");

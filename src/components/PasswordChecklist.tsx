@@ -1,4 +1,4 @@
-// src/components/PasswordChecklist.tsx
+
 "use client";
 
 import { checkPassword } from "@/lib/passwordPolicy";

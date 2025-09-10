@@ -18,7 +18,7 @@ export default function ForgotPasswordPage() {
     if (!email) return toast.warning("Enter your email");
     setBusy(true);
     try {
-      // Build continue URL to our confirmation page (must be on an authorized domain)
+    
       const origin =
         typeof window !== "undefined" ? window.location.origin : "http://localhost:3000";
       const continueUrl = `${origin}/auth/reset-done?email=${encodeURIComponent(
@@ -27,7 +27,7 @@ export default function ForgotPasswordPage() {
 
       const actionCodeSettings: ActionCodeSettings = {
         url: continueUrl,
-        handleCodeInApp: false, // leave false for normal reset flow
+        handleCodeInApp: false, 
       };
 
       localStorage.setItem("lastResetEmail", email.trim());

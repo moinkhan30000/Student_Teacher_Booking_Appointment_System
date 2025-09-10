@@ -28,16 +28,16 @@ export default function TeacherAvailabilityPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
-  // admin work window + holidays (read-only here)
+ 
   const [workStart, setWorkStart] = useState("09:00");
   const [workEnd, setWorkEnd] = useState("17:00");
 
-  // teacher data
+
   const [weekly, setWeekly] = useState<Weekly>({});
   const [busy, setBusy] = useState<Busy[]>([]);
   const [newBusy, setNewBusy] = useState<Busy>({ date: "", start: "09:00", end: "10:00", note: "" });
 
-  // For adding new weekly slot per day
+
   const [newWeekly, setNewWeekly] = useState<Record<Weekday, Range>>({
     mon: { start: "09:00", end: "10:00" },
     tue: { start: "09:00", end: "10:00" },

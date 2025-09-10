@@ -11,7 +11,7 @@ export function RequireAuth({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!loading && !uid) router.replace("/");
   }, [loading, uid, router]);
-  if (loading || !uid) return null; // or a spinner
+  if (loading || !uid) return null; 
   return <>{children}</>;
 }
 

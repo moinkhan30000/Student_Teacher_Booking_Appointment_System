@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Weekends are not bookable" }, { status: 400 });
     }
 
-    // 🚫 Block same-day bookings
+    // Block same-day bookings
     const today = new Date();
     if (isSameDay(today, startAt)) {
       return NextResponse.json({ error: "Same-day bookings are not allowed" }, { status: 400 });

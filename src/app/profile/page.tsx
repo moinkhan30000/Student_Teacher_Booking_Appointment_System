@@ -48,7 +48,7 @@ export default function ProfilePage() {
       setDepartment(d.department ?? "");
       setSubject(d.subject ?? "");
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, [uid]);
 
   async function saveProfile(e?: FormEvent) {

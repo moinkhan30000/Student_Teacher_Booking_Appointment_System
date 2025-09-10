@@ -169,8 +169,8 @@ export async function POST(req: NextRequest) {
     }
 
     if (action === "cancel") {
-      // Student, teacher, or admin can cancel (past protected for non-admin)
-      const isCancellingTeacher = isTeacher || (isAdmin && roles.includes("teacher")); // admin may act as teacher
+      // Student, teacher, or admin can cancel 
+      const isCancellingTeacher = isTeacher || (isAdmin && roles.includes("teacher")); 
       const isCancellingStudent = isStudent;
       const isCancellingAdmin = isAdmin;
 

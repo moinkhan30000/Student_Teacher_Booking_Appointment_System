@@ -1,5 +1,4 @@
-// src/lib/password.ts
-// Client-side checker to mirror console policy (8–16, UPPER, lower, number, symbol)
+
 export function checkPassword(pw: string) {
   const tests = {
     length: pw.length >= 8 && pw.length <= 16,

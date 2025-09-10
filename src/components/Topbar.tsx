@@ -16,7 +16,7 @@ export default function Topbar() {
   async function handleSignOut() {
     try {
       await signOut(auth);
-      // hard-redirect to sign-in so the view updates immediately
+
       window.location.href = "/";
     } catch (e) {
       console.error("Sign out failed:", e);

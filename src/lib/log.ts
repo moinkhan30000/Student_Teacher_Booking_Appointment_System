@@ -1,4 +1,4 @@
-// src/lib/log.ts
+
 import { db } from "./firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
